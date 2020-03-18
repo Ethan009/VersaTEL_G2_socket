@@ -1,11 +1,12 @@
 #coding:utf-8
-import LinstorDB as db
+from VersaTEL_G2_socket import LinstorDB as db
 import sqlite3
 
 
 class Process_data():
     def __init__(self):
         self.linstor_db = db.LINSTORDB()
+        # self.CRM = db.PacemakerDB()
 
     def process_data_node(self):
         cur = self.linstor_db.cur
@@ -60,6 +61,7 @@ class Process_data():
                      "res_num_son": list_resdict}
             date.append(date_)
         dict = {"code": 0, "msg": "", "count": 1000, "data": date}
+        cur.close()
         return dict
 
     def process_data_resource(self):
@@ -118,6 +120,7 @@ class Process_data():
                             "mirror_way_son": list_resdict}
                 date.append(date_one)
         dict = {"code": 0, "msg": "", "count": 1000, "data": date}
+        cur.close()
         return dict
 
     def process_data_stp(self):
@@ -180,4 +183,5 @@ class Process_data():
                      "res_name_son": list_resdict}
             date.append(date_)
         dict = {"code": 0, "msg": "", "count": 1000, "data": date}
+        cur.close()
         return dict

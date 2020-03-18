@@ -2,8 +2,8 @@
 from flask import Flask, jsonify, render_template, request, make_response
 import json
 from flask_cors import *
-import Process
-
+from VersaTEL_G2_socket import Process
+import timeit
 
 app = Flask(__name__)  # 实例化app对象
 CORS(app, resources=r'/*')  
@@ -11,14 +11,18 @@ message_get_ll = None
 
 @app.route('/data_two', methods=['GET', 'POST'])  # 路由
 def data_two():
-
+    a = timeit.timeit()
     pc = Process.Process_data()
+    # a = timeit.timeit()
     data_two_lict = pc.process_data_node()
     response = make_response(jsonify(data_two_lict))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+    b = timeit.timeit()
+    print('time')
+    print(b-a)
     return response
 
 
