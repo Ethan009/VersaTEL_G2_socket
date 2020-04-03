@@ -113,7 +113,7 @@ def sp():
 
 @datablue.route('/node_create', methods=['GET', 'POST'])  # 路由
 def node_create():
-    global node
+    global node_create
    
     response = make_response(jsonify(node_create))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors

@@ -37,25 +37,35 @@ def send_message():
 def LINSTOR_message():
     Node = ['Node_Name', 'IP', 'Node_Type']
     Storage_pool = ['SP_Name', 'Node_One_Text', 'lvm_name','lv_Text']
-    
+    data={}
     if request.method == 'GET':
         data_all = request.args.items()
         print("data_all:", data_all)
-    for i in data_all:
+        for i in data_all:
+            print(i);
+           
             data_one_dict = {i[0]:i[1]}
-            data_dict.update(data_one_dict)
-    for i in  data_dict:
-        if i in Node:
-            break
-        if i in Storage_pool:
-            print(data_dict.values()[0])
-            print(data_dict.values()[1])
-            print(data_dict.values()[2])
-            print(data_dict.values()[3])
+            data.update(data_one_dict)
+        for i in  data.keys():
+            if i in Node:
+                break
+            if i in Storage_pool:
+                print('i:',i)
+                print(data);
+                print(list(data.values())[0])
+                print(list(data.values())[1])
+                print(list(data.values())[2])
+                print(list(data.values())[3])
+                
             
-            #str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s"%(sp,node,'-lvm','vg1')
-            #sessage = vst.conn(str_cmd)
-            
+                str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s"%(data['SP_Name'],data['Node_One_Text'],data['lvm_name'],data['lv_Text'])
+                print(str_cmd)
+                import pickle
+                sessage = vst.conn(pickle.dumps(str_cmd))
+
+                print("sessage:",sessage)
+                break
+
         return sessage
     else:
         return "test"

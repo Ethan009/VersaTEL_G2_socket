@@ -18,7 +18,6 @@ def conn(ex_cmd):
     client.send(command)
     client.recv(8192)
     client.send(ex_cmd)
-
     data_len = int(client.recv(8192).decode())
     client.send(b'ok')
     chunks = []
