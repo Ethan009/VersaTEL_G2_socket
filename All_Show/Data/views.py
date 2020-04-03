@@ -14,7 +14,9 @@ import Process
 from iscsi_json import JSON_Operation
 
 message_get_ll = None
-global lvm
+global lvm 
+global sp
+global node_create
 
 @datablue.route('/node', methods=['GET', 'POST'])  # 路由
 def data_two():
@@ -69,9 +71,18 @@ def data_configuration():
 @datablue.route('/socket', methods=['GET', 'POST'])  # 路由
 def data_test():
     global lvm
+    global node_create
+    global sp
     pc = Process.Process_data()
-    print(pc.get_option_lvm())
+   # print('1:',pc.get_option_lvm())
     lvm = pc.get_option_lvm()
+    node_create = pc.get_option_node()
+    print("node_create:",node_create);
+
+
+    sp = pc.get_option_sp()
+    print("sp:",sp)
+    #node_num = pc.get_option_nodenum()
     #print(pc.get_option_sp())#FOR create resource
     
     return "response"
@@ -80,7 +91,7 @@ def data_test():
 @datablue.route('/lvm', methods=['GET', 'POST'])  # 路由
 def lvm():
     global lvm
-    print(lvm);
+    print('2:',lvm);
     response = make_response(jsonify(lvm))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -89,35 +100,22 @@ def lvm():
     return response
 
 
-@datablue.route('/testthree', methods=['GET', 'POST'])  # 路由
-def data_test_three():
-    data_test_three = [{'NodeName': 'Node1',
-                    'Spool': [{'device_name': '1'},
-                             {'device_name': '2'},
-                             {'device_name': '3'},
-                             {'device_name': '4'}]
-                  },
-                  {'NodeName': 'Node2',
-                  'Spool': [{'device_name': '5'},
-                            { 'device_name': '6'},
-                             {'device_name': '7'},
-                             {'device_name': '8'}]
-                }]
-    
-    #     data_test_three = {
-#                     'Node1': {'device_name': '1',
-#                               'device_name': '2',
-#                               'device_name': '3',
-#                               'device_name': '4',
-#                               'device_name': '5'},
-#                     'Node2': {'device_name': '5',
-#                             'device_name': '6',
-#                              'device_name': '7',
-#                              'device_name': '8'}}
-    
-    
-    
-    response = make_response(jsonify(data_test_three))
+@datablue.route('/sp', methods=['GET', 'POST'])  # 路由
+def sp():
+    #global node
+    global sp
+    response = make_response(jsonify(sp))
+    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+    return response
+
+@datablue.route('/node_create', methods=['GET', 'POST'])  # 路由
+def node_create():
+    global node
+   
+    response = make_response(jsonify(node_create))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
@@ -125,39 +123,5 @@ def data_test_three():
     return response
 
 ##############################
-# -------------------------
-
-
-@datablue.route('/data_iqn_alias_all', methods=['GET', 'POST'])  # 路由
-def iqn_alias_all1():
-    iqn_alias_all = "111"
-    response = make_response(jsonify(iqn_alias_all))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    return response
-
-
-@datablue.route('/data_target_alias_all', methods=['GET', 'POST'])  # 路由
-def target_alias_all1():
-    target_alias_all = "sss"
-    response = make_response(jsonify(target_alias_all))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    return response
-
-
-@datablue.route('/data_ig_all', methods=['GET', 'POST'])  # 路由
-def ig_all1():
-    ig_all = "sss"
-    response = make_response(jsonify(ig_all))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    return response
-# ----------------------------------
+#
 

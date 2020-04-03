@@ -56,10 +56,10 @@ body {
 					<label class="col-sm-2 c">Node Type</label>
 					<div class="col-sm-10 ">
 						<select id="sel1" class="selectpicker">
-							<option value="Satellite">Satellite</option>
-							<option value="Auxiliary">Auxiliary</option>
-							<option value="Combined">Combined</option>
-							<option value="Controller">Controller</option>
+							<option value="1">Satellite</option>
+							<option value="2">Auxiliary</option>
+							<option value="3">Combined</option>
+							<option value="4">Controller</option>
 						</select>
 					</div>
 					<script type="text/javascript">
@@ -91,47 +91,18 @@ body {
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 ">Node</label>
+
 					<div class="col-sm-10 ">
 						<select id="Node" class="selectpicker">
 						</select>
 					</div>
-					<script type="text/javascript">
-					
-					$('#Node').selectpicker({width:200});
-					
-					 $(function() {
-                            $.ajax({
-                                url: "/node_create",
-                                type: "get",
-                                dataType: "json",
-                                success: function(data) {
-                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
-                                      $('#Node').html(""); 
-                                    var html = "";
-                                	
-                                    for(i in data) {
-                                   
-                                     html += '<option value=' + data[i].key_node + '>' + data[i].key_node + '</option>'
-                                    }
-                                      $('#Node').append(html);  
-                                            // 缺一不可
-							        $('#Node').selectpicker('refresh');
-							        $('#Node').selectpicker('render');
-                                }
-                            });
-                            });   $(window).on('load', function () {
-							    $('#Node').selectpicker({
-							        'selectedText': 'cat'
-							    });
-							});
-					</script>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 ">vg/thin lv</label>
 					<div class="col-sm-10">
-						<input type="radio" name="gender" value="-lvm" id='radio1' />lvm
-						<input type="radio" name="gender" value="-tlv" id='radio2' />thin_lvm
-						<select id="lv" class="selectpicker ">
+						<input type="radio" name="gender" value="0" id='radio1' />lvm <input
+							type="radio" name="gender" value="1" id='radio2' />thin lvm <select
+							id="lv" class="selectpicker ">
 						</select>
 						<script>
 		 // 根据单选框触发是否提交事件!
@@ -146,7 +117,7 @@ body {
                                     //var _data = data.data; //由于后台传过来的json有个data，在此重命名
                                       $('#lv').html(""); 
                                     var html = "";
-                                    var lvm =data.lvm
+                                    var lvm = data.lvm
                                     for(i in lvm) {
                                      html += '<option value=' + lvm[i].cityName + '>' + lvm[i].cityName + '</option>'
                                     }
@@ -201,7 +172,7 @@ body {
 
 						<script type="text/javascript">
 					$('#lv').selectpicker({width:100});
-					$('#Node_one').selectpicker({width:200});
+					$('#Node').selectpicker({width:200});
 					</script>
 
 					</div>
@@ -213,7 +184,7 @@ body {
 							data-target="#myModal1">Create</button>
 					</div>
 				</div>
-
+					
 			</div>
 			<!-- ------------------------ -->
 			<div class="col-md-12 column">
@@ -234,7 +205,7 @@ body {
 				<div class="form-group">
 					<label for="inputPassword" class="col-sm-2 control-label">Size</label>
 					<div class="col-sm-1">
-						<input type="text" class="form-control" id="Size_one"
+						<input type="text" class="form-control" id="Resource_Name_one"
 							placeholder="请输入" style="width: 100px;" value="">
 					</div>
 					<div class="col-sm-9">
@@ -252,13 +223,13 @@ body {
 				<div class="form-group">
 					<label class="col-sm-2 c">Node</label>
 					<div class="col-sm-10 ">
-						<select id='Node_one' name='Node_one' multiple
+						<select id='Node_Two' name='Node_Two' multiple
 							class="selectpicker" data-live-search="true">
 						</select>
 					</div>
 
 					<script type="text/javascript">
-					$('#Node_one').selectpicker({width:200});
+					$('#Node_Two').selectpicker({width:200});
 					
 				    $(function() {
                             $.ajax({
@@ -287,6 +258,7 @@ body {
 					</script>
 				</div>
 
+				<!-- ggggggggggggggggggggggggggggggggggggggggggggggggggggggg -->
 				<div class="form-group">
 					<label class="col-sm-2 ">Storage pool</label>
 					<div class="col-sm-10 ">
@@ -296,7 +268,7 @@ body {
 						</select>
 					</div>
 
-
+					
 					<script type="text/javascript">
 					
 					$('#Storage_pool').selectpicker({width:200});
@@ -335,14 +307,15 @@ body {
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="mirror_create_one" id="mirror_create_one"
-							data-target="#myModal1">Create</button>
+							name="create" id="igroup_create" data-target="#myModal1">Create</button>
+					</div>
+						<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="add_mirror_one" id="add_mirror_one" data-target="#myModal1">Add
-							Mirror</button>
+							name="ini_creat" id="ini_alias_create" data-target="#myModal1">Add Mirror
+							Create</button>
 					</div>
 				</div>
-
+				
 			</div>
 			<!-- ------------------------ -->
 			<div class="col-md-12 column col-sm-2">
@@ -355,22 +328,22 @@ body {
 					<label for="inputEmail" class="col-sm-2 control-label">Resource
 						Name</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="Resource_Name_two"
+						<input type="text" class="form-control" id="Resource_Name_four"
 							placeholder="请输入" style="width: 200px;" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword" class="col-sm-2 control-label">Size</label>
 					<div class="col-sm-1">
-						<input type="text" class="form-control" id="Size_two"
+						<input type="text" class="form-control" id="Resource_Name_one"
 							placeholder="请输入" style="width: 100px;" value="">
 					</div>
 					<div class="col-sm-9">
 						<select class="selectpicker" id="select_two">
-							<option value="GB">GB</option>
-							<option value="TB">TB</option>
-							<option value="MB">MB</option>
-							<option value="KB">KB</option>
+							<option value="0">GB</option>
+							<option value="1">TB</option>
+							<option value="2">MB</option>
+							<option value="3">KB</option>
 						</select>
 					</div>
 					<script type="text/javascript">
@@ -385,43 +358,16 @@ body {
 					</div>
 					<script type="text/javascript">
 					$('#Node_Num').selectpicker({width:100});
-					   $(function() {
-                            $.ajax({
-                                url: "/test",
-                                type: "get",
-                                dataType: "json",
-                                success: function(data) {
-                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
-                                      $('#Node_Num').html(""); 
-                                    var html = "";
-                                    var lvm =data.lvm
-                                    for(i in lvm) {
-                                     html += '<option value=' + lvm[i].cityName + '>' + lvm[i].cityName + '</option>'
-                                    }
-                                      $('#Node_Num').append(html);  
-                                            // 缺一不可
-							        $('#Node_Num').selectpicker('refresh');
-							        $('#Node_Num').selectpicker('render');
-                                }
-                            });
-                            });   $(window).on('load', function () {
-							    $('#Node_Num').selectpicker({
-							        'selectedText': 'cat'
-							    });
-							});
 					</script>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="mirror_create_two" id="mirror_create_two"
-							data-target="#myModal1">Create</button>
-						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="add_mirror_two" id="add_mirror_two" data-target="#myModal1">Add
-							Mirror</button>
+							name="ini_creat" id="ini_alias_create" data-target="#myModal1">Create</button>
 					</div>
 				</div>
 			</div>
+			<!-- ------------------------ -->
 			<!-- ------------------------ -->
 
 			<div class="col-md-12 column">
@@ -435,55 +381,159 @@ body {
 					<label for="inputEmail" class="col-sm-2 control-label">Resource
 						Name</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="Diskless_name"
+						<input type="text" class="form-control" id="Resource_Name_two"
 							placeholder="请输入" style="width: 200px;" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword" class="col-sm-2 control-label">Node</label>
 					<div class="col-sm-10">
-						<select id="Diskless_node" class="selectpicker">
+						<select id="Node_low" class="selectpicker">
 						</select>
 					</div>
 					<script type="text/javascript">
+					$('#Node_low').selectpicker({width:200});
+					</script>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default" data-toggle="modal"
+							name="create" id="More_create" data-target="#myModal1">Create</button>
+					</div>
+				</div>
+			</div>
+			<!---------------------------->
+			<div class="col-md-12 ">
+				<div class="page-header">
+					<h1>
+						<small>Resource mirror</small>
+					</h1>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-2 control-label">Resource
+						Name</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="Resource_Name_three"
+							placeholder="请输入" style="width: 200px;" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 c">Node</label>
+					<div class="col-sm-10 ">
+						<select id='Node_three' name='Node_Two' multiple
+							class="selectpicker" data-live-search="true">
+						</select>
+					</div>
+
+					<script type="text/javascript">
+					$('#Node_three').selectpicker({width:200});
 					
-					$('#Diskless_node').selectpicker({width:200});
-				 $(function() {
+				    $(function() {
                             $.ajax({
                                 url: "/test",
                                 type: "get",
                                 dataType: "json",
                                 success: function(data) {
                                     //var _data = data.data; //由于后台传过来的json有个data，在此重命名
-                                      $('#Diskless_node').html(""); 
+                                      $('#Node_Two').html(""); 
                                     var html = "";
-                                    var lvm =data.lvm
-                                    for(i in lvm) {
-                                     html += '<option value=' + lvm[i].cityName + '>' + lvm[i].cityName + '</option>'
+                                    for(i in data) {
+                                     html += '<option value=' + data[i].cityName + '>' + data[i].cityName + '</option>'
                                     }
-                                      $('#Diskless_node').append(html);  
+                                      $('#Node_Two').append(html);  
                                             // 缺一不可
-							        $('#Diskless_node').selectpicker('refresh');
-							        $('#Diskless_node').selectpicker('render');
+							        $('#Node_Two').selectpicker('refresh');
+							        $('#Node_Two').selectpicker('render');
                                 }
                             });
-                            });   $(window).on('load', function () {
-							    $('#Diskless_node').selectpicker({
+                            });
+                             $(window).on('load', function () {
+							    $('#Node_Two').selectpicker({
 							        'selectedText': 'cat'
 							    });
 							});
-				
+					</script>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 ">Storage pool</label>
+					<div class="col-sm-10 ">
+						<select id='Storage_pool_one' name='Storage_pool' multiple
+							class="selectpicker" data-live-search="true">
+						</select>
+					</div>
+
+					<script type="text/javascript">
+					$('#Storage_pool_one').selectpicker({width:200});
+					
+				    $(function() {
+                            $.ajax({
+                                url: "/test",
+                                type: "get",
+                                dataType: "json",
+                                success: function(data) {
+                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
+                                      $('#Storage_pool_one').html(""); 
+                                    var html = "";
+                                    for(i in data) {
+                                     html += '<option value=' + data[i].cityName + '>' + data[i].cityName + '</option>'
+                                    }
+                                      $('#Storage_pool_one').append(html);  
+                                            // 缺一不可
+							        $('#Storage_pool_one').selectpicker('refresh');
+							        $('#Storage_pool_one').selectpicker('render');
+                                }
+                            });
+                            });
+                             $(window).on('load', function () {
+							    $('#Storage_pool_one').selectpicker({
+							        'selectedText': 'cat'
+							    });
+							});
 					</script>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="Diskless_Create" id="Diskless_Create"
-							data-target="#myModal1">Create</button>
+							name="tage_create" id="tag_alias_create" data-target="#myModal1">Create</button>
 					</div>
 				</div>
 			</div>
-			<!---------------------------->
+			<!-- ------------------------ -->
+			<div class="col-md-12 ">
+				<div class="page-header">
+					<h1>
+						<small>Resource mirror</small>
+					</h1>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-2 control-label">Resource
+						Name</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="Resource_Name_five"
+							placeholder="请输入" style="width: 200px;" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 c">Node</label>
+
+					<div class="col-sm-10 ">
+						<select id="resource_mirror_node" class="selectpicker">
+						</select>
+					</div>
+					<script type="text/javascript">
+					$('#resource_mirror_node').selectpicker({width:200});
+					</script>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default" data-toggle="modal"
+							name="tage_create" id="tag_alias_create" data-target="#myModal1">Create</button>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 
 
@@ -526,14 +576,11 @@ body {
 	$("#Node_create").click(function () {
      var Node_Name = $("#Node_Name").val()
      var IP = $("#IP").val()
-	
-	 var ss = $("#sel1").val().toString()
-	 alert(ss);
-	     
+     
      var Node_Type =document.getElementById("sel1");
      var index=Node_Type.selectedIndex;
      var Node_Type_Test = Node_Type.options[index].text;
-     
+     alert(Node_Type_Test);
      $.ajax({
          url:"/LINSTOR_message",
          type:"GET",
@@ -552,29 +599,15 @@ body {
   ///////////////////////////////////////////////
  	$("#storage_pool_create").click(function () {
      var SP_Name = $("#SP_Name").val()
-     
-     var Node_One =document.getElementById("Node");
-     var index = Node_One.selectedIndex;
-     var Node_One_Text = Node_One.options[index].text;
-     
-     
-     var radio_text = $("input[name='gender']:checked").val();
-
-     var lv =document.getElementById("lv");
-     var index = lv.selectedIndex;
-     var lv_Text = lv.options[index].text;
-     
-     
-     
+     var Node_One = $("#Node_One").val()
+     var vg_lv = $("#vg_lv").val()
      $.ajax({
-         url:"/LINSTOR_message",
+         url:"/send_message",
          type:"GET",
          data:{
              SP_Name:SP_Name,
-             Node_One_Text:Node_One_Text,
-             lvm_name:radio_text,
-             lv_Text:lv_Text
-             
+             Node_One:Node_One,
+             vg_lv:vg_lv
          },
          success:function (data) {
          alert("创建成功！！");
@@ -584,27 +617,72 @@ body {
      })
     $("#SP_Name").val("");
 	$("#Node_One").val("");
+	$("#vg_lv").val("");
  });
- ///////////////////////////////////////////
- 
- 
- 
- /////////////////////////////////////
- $("#mirror_create_two").click(function () {
-     var Resource_Name_two = $("#Resource_Name_two").val()
-     var size_two = $("#Size_two").val()
-     var select_two = $("#select_two").val().toString()
-     var Node_Num = $("#Node_Num").val().toString()
-     
-     
+ //////////////////////
+ $("#igroup_create").click(function () {
+     var igroup = $("#igroup").val()
+     var ini_aa = $("#ini_aa").val().toString()
+  
      $.ajax({
-         url:"/LINSTOR_message",
+         url:"/send_message",
          type:"GET",
          data:{
-             Resource_Name_two:Resource_Name_two,
-             size_two:size_two,
-             select_two:select_two,
-             Node_Num:Node_Num
+             igroup:igroup,
+             ini_aaa:ini_aa
+         },
+         success:function (data) {
+         alert("创建成功！！");
+              $(function() {
+                            $.ajax({
+                                url: "/data_ig_all",
+                                type: "get",
+                                dataType: "json",
+                                success: function(data) {
+                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
+                                    $('#igroup_list').html("");
+                                    var html = "";
+                                    for(i in data) {
+                                       html += '<option value=' + data[i].ig + '>' + data[i].ig + '</option>'
+                                    }
+                                    $('#igroup_list').append(html);
+                                           // 缺一不可
+							        $('#igroup_list').selectpicker('refresh');
+							        $('#igroup_list').selectpicker('render');
+                                }
+                            });
+                            });
+                             $(window).on('load', function () {
+							    $('#igroup_list').selectpicker({
+							        'selectedText': 'cat'
+							    });
+							});
+         
+         
+         //$("#double").val(data);
+          //赋值
+         },
+         error:function () {
+         }
+     })
+       $("#igroup").val("");
+    $("#ini_aa").val("");
+ });
+ 
+ $("#More_create").click(function () {
+     var name = $("#name").val()
+     var size = $("#size").val()
+     var igroup_list = $("#igroup_list").val().toString()
+     var tag_alias_igroup = $("#tag_alias_igroup").val().toString()
+     $.ajax({
+         url:"/send_message",
+         type:"GET",
+         data:{
+             name:name,
+             size:size,
+             igroup_list:igroup_list,
+             tag_alias_igroup,tag_alias_igroup
+             
          },
          success:function (data) {
          //$("#double").val(data);
@@ -613,53 +691,9 @@ body {
          error:function () {
          }
      })
-      $("#Resource_Name_two").val("");
-     $("#size_two").val("");
+      $("#name").val("");
+     $("#size").val("");
  });
- 
-  $("#add_mirror_two").click(function () {
-     var Resource_Name_two = $("#Resource_Name_two").val()
-     var Node_Num = $("#Node_Num").val().toString()
-     $.ajax({
-         url:"/LINSTOR_message",
-         type:"GET",
-         data:{
-             Resource_Name_two:Resource_Name_two,
-             Node_Num:Node_Num
-         },
-         success:function (data) {
-         //$("#double").val(data);
-          //赋值
-         },
-         error:function () {
-         }
-     })
-      $("#Resource_Name_two").val("");
-     $("#size_two").val("");
- });
- //////////////////////////////////////
-  $("#Diskless_Create").click(function () {
-     var Diskless_name = $("#Diskless_name").val()
-     var Diskless_node = $("#Diskless_node").val().toString()
-     $.ajax({
-         url:"/LINSTOR_message",
-         type:"GET",
-         data:{
-             Diskless_name:Diskless_name,
-             Diskless_node:Diskless_node
-         },
-         success:function (data) {
-         //$("#double").val(data);
-          //赋值
-         },
-         error:function () {
-         }
-     })
-      $("#Diskless_name").val("");
- });
- 
- 
- 
 	</script>
 	<script type="text/javascript">
 $("#newcreate").click(function(){
