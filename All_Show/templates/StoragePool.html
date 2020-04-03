@@ -26,6 +26,7 @@ body {
 		</h1>
 	</div>
 
+
 	<table class="layui-hide" id="demo" lay-filter="test"></table>
 	<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -44,44 +45,65 @@ function() {
     //执行一个 table 实例
     table.render({
         elem: '#demo',
-        url: '/data_three' //数据接口
+        url: '/storagepool' //数据接口
         ,
         title: '用户表',
-        page: true //开启分页
-        ,
+       
         cols: [[ //表头
         {
             type: 'checkbox',
             fixed: 'left'
         },
-        {
-            field: 'resource',
-            title: 'resource',
+	{
+            field: 'stp_name',
+            title: 'stp_name',
             sort: true
         },
+	 {
+            field: 'node_name',
+            title: 'node_name',
+            sort: true
+        },
+       
         {
-            field: 'mirror_way',
-            title: 'mirror_way',
+            field: 'res_num',
+            title: 'res_num',
             event: 'collapse',
             templet: function(d) {
-                return '<div style="position: relative;\n' + '    padding: 0 10px 0 20px;">' + d.mirror_way + '<i style="left: 0px;" lay-tips="展开" class="layui-icon layui-colla-icon layui-icon-right"></i></div>'
+                return '<div style="position: relative;\n' + '    padding: 0 10px 0 20px;">' + d.res_num + '<i style="left: 0px;" lay-tips="展开" class="layui-icon layui-colla-icon layui-icon-right"></i></div>'
             }
         },
-        {
-            field: 'device_name',
-            title: 'device_name',
+	 {
+            field: 'driver',
+            title: 'driver',
+        },
+	 {
+            field: 'pool_name',
+            title: 'pool_name',
             sort: true
         },
         {
-            field: 'size',
-            title: 'size',
+            field: 'free_size',
+            title: 'free_size',
             sort: true
         },
-        {
-            field: 'used',
-            title: 'used',
+	 {
+            field: 'total_size',
+            title: 'total_size',
             sort: true
         },
+       
+           {
+            field: 'snapshots',
+            title: 'snapshots',
+            sort: true
+        },
+           {
+            field: 'status',
+            title: 'status',
+            sort: true
+        },
+
         {
             fixed: 'right',
             align: 'center',
@@ -93,7 +115,7 @@ function() {
     table.on('tool(test)',
     function(obj) {
 
-        var data = obj.data.mirror_way_son
+        var data = obj.data.res_name_son
         //做好数据处理，下面直接放进子表中
         
         if (obj.event === 'collapse') {
@@ -124,26 +146,31 @@ function() {
                             fixed: 'left'
                         },
 			 {
-                            field: 'node_name',
-                            title: 'node_name'
+                            field: 'res_name',
+                            title: 'res_name'
                         },
                         {
-                            field: 'stp_name',
-                            title: 'stp_name'
-                        },
-                        {
-                            field: 'drbd_role',
-                            title: 'drbd_role',
+                            field: 'device_name',
+                            title: 'device_name',
                             sort: true
                         },
                        
                         {
-                            field: 'status',
-                            title: 'status',
+                            field: 'size',
+                            title: 'size',
                             sort: true
                         },
                         {
+                            field: 'status',
+                            title: 'status'
+                        },
+                         {
+                            field: 'used',
+                            title: 'used'
+                        },
+                        {
                             fixed: 'right',
+                            width: 80,
                             align: 'center',
                             toolbar: '#barDemo1'
                         }]]
