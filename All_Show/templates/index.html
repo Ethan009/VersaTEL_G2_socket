@@ -5,10 +5,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>-----</title>
-<link rel="stylesheet"
-	href="https://www.layuicdn.com/layui-v2.5.0/css/layui.css">
-<script src="https://www.layuicdn.com/layui/layui.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link href="{{ url_for('static',filename='layui.css') }}"
+	rel="stylesheet" type="text/css" />
+<script src="{{ url_for('static',filename='JQuery.js') }}"></script>
+<script src="{{ url_for('static',filename='layui.js') }}"></script>
 <style>
 .layui-side-scroll {
 	width: 100%;
@@ -57,7 +57,7 @@
 						</dd>
 					</dl></li>
 			</ul>
-			
+
 		</div>
 		<div class="gy_wrap1">
 			<div class="layui-side layui-bg-black">
@@ -71,6 +71,13 @@
 						<!-- <li><a href="javascript:;"><img class="logo"
                             src="images/logo.png" alt=""></a></li> -->
 						<li class="layui-nav-item layui-nav-itemed"><a class="title"
+							onclick="selectItem(this)" id="LINSTOR_Create"><span>LINSTOR_Create</span></a></li>
+
+						<li class="layui-nav-item layui-nav-itemed"><a class="title"
+							onclick="selectItem(this)" id="iSCSI_Create"><span>iSCSI_Create</span></a></li>
+
+
+						<li class="layui-nav-item layui-nav-itemed"><a class="title"
 							onclick="selectItem(this)" id="Show"><span>Show</span></a></li>
 
 						<li class="layui-nav-item"><a class="title"
@@ -82,6 +89,10 @@
 						<li class="layui-nav-item"><a class="title"
 							onclick="selectItem(this)" id="StoragePool"><span>StoragePool</span></a></li>
 
+						<li class="layui-nav-item"><a class="title"
+							onclick="selectItem(this)" id="Configuration"><span>iSCSI_Show</span></a></li>
+
+
 					</ul>
 				</div>
 			</div>
@@ -90,8 +101,7 @@
 		<div class="fourteen wide stretched column" id="mainpage">
 			<iframe
 				style="border: 0; width: 85%; min-height: 80%; margin-left: 15%; max-width: 1700px; position: absolute; z-index: 9999;"
-				src="/show" frameborder="0" scrolling="auto"
-				id="iframecontend"></iframe>
+				src="/show" frameborder="0" scrolling="auto" id="iframecontend"></iframe>
 			<!-- src里面可以放主页网址 -->
 		</div>
 		<div class="layui-footer">
@@ -103,13 +113,15 @@
     function selectItem(obj) {
         $('.active.item').removeClass("active");
         obj.className += " active";
-        if(obj.id=='Create'){
-            $('#mainpage iframe').attr('src',"/create");
+        if(obj.id=='LINSTOR_Create'){
+            $('#mainpage iframe').attr('src',"/LINSTOR_create");
+            $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"}); 
+        }else if(obj.id=='iSCSI_Create'){
+            $('#mainpage iframe').attr('src',"/iSCSI_create");
             $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"}); 
         }else if(obj.id=='Show'){
             $('#mainpage iframe').attr('src',"/show");
             $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"}); 
-
         }else if(obj.id=='Node'){
                 $('#mainpage iframe').attr('src',"/Node");
                 $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
@@ -118,6 +130,9 @@
                 $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
         }else if(obj.id=='StoragePool'){
                 $('#mainpage iframe').attr('src',"/StoragePool");
+                $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
+        }else if(obj.id=='Configuration'){
+                $('#mainpage iframe').attr('src',"/Configuration");
                 $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
         }
         }
@@ -163,5 +178,19 @@
     });
 
 </script>
+<script type="text/javascript">
+	$("#LINSTOR_Create").click(function(){
+		$.ajax({
+			url:"/socket",
+			type:"get",
+			success:function(){
+				alert("sss");
+			}
+		});
+	});
+
+
+</script>>
+
 </body>
 </html>
