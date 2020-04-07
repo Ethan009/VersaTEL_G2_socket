@@ -48,7 +48,12 @@ def LINSTOR_message():
             data.update(data_one_dict)
         for i in  data.keys():
             if i in Node:
+                print('create_node_nodename',data['Node_Name'])
+                print('create_node_ip',data['IP'])
+
+                CLI_result = ''
                 break
+
             if i in Storage_pool:
                 print('i:',i)
                 print(data);
@@ -61,13 +66,13 @@ def LINSTOR_message():
                 str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s -gui"%(data['SP_Name'],data['Node_One_Text'],data['lvm_name'],data['lv_Text'])
                 print(str_cmd)
                 str_cmd = str_cmd.encode()
-                sessage = vst.conn(str_cmd)
-                print("sessage:",sessage)
+                CLI_result = vst.conn(str_cmd)
+                
                 break
 
-        if sessage == True:
+        if CLI_result == True:
             return 'SUCCESS'
         else:
-            return sessage
+            return CLI_result
     else:
-        return "test"
+        return "request failed"

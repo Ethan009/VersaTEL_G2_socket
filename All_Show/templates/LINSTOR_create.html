@@ -28,7 +28,7 @@ body {
 </style>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row clearfix">
 			<!-- ------------------------ -->
 			<div class="col-md-12 column col-sm-2">
@@ -250,11 +250,7 @@ body {
 					$('#select_one').selectpicker({width:105});
 					</script>
 				</div>
-<<<<<<< HEAD
 				
-=======
->>>>>>> 40b07c9606cb27a1bf28fce6cb1e11c335514118
-
 				<div class="form-group">
 					<label class="col-sm-2 ">Storage pool</label>
 					<div class="col-sm-10 ">
@@ -420,15 +416,16 @@ body {
 					$('#Diskless_node').selectpicker({width:200});
 				 $(function() {
                             $.ajax({
-                                url: "/node_create",
+                                url: "/test",
                                 type: "get",
                                 dataType: "json",
                                 success: function(data) {
                                     //var _data = data.data; //由于后台传过来的json有个data，在此重命名
                                       $('#Diskless_node').html(""); 
                                     var html = "";
-                                    for(i in data) {
-                                     html += '<option value=' + data[i].key_node + '>' + data[i].node + '</option>'
+                                    var lvm =data.lvm
+                                    for(i in lvm) {
+                                     html += '<option value=' + lvm[i].cityName + '>' + lvm[i].cityName + '</option>'
                                     }
                                       $('#Diskless_node').append(html);  
                                             // 缺一不可
@@ -469,7 +466,7 @@ body {
 					<div class="modal-body">
 						<textarea class="form-control" id="text_show"></textarea>
 					</div>
-
+				
 
 				</div>
 				<!-- /.modal-content -->
