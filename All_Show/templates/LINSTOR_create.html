@@ -314,7 +314,7 @@ body {
 			<div class="col-md-12 column col-sm-2">
 				<div class="page-header">
 					<h1>
-						<small>Resource</small>
+						<small>Resource(auto)</small>
 					</h1>
 				</div>
 				<div class="form-group">
@@ -382,9 +382,6 @@ body {
 						<button type="submit" class="btn btn-default" data-toggle="modal"
 							name="mirror_create_two" id="mirror_create_two"
 							data-target="#myModal1">Create</button>
-						<button type="submit" class="btn btn-default" data-toggle="modal"
-							name="add_mirror_two" id="add_mirror_two" data-target="#myModal1">Add
-							Mirror</button>
 					</div>
 				</div>
 			</div>
@@ -464,7 +461,7 @@ body {
 						<h4 class="modal-title" id="myModalLabel"></h4>
 					</div>
 					<div class="modal-body">
-						<textarea class="form-control" id="text_show"></textarea>
+						<textarea class="form-control" id="text_show" style="height:300px"></textarea>
 					</div>
 				
 
@@ -482,8 +479,6 @@ body {
      var Node_Name = $("#Node_Name").val()
      var IP = $("#IP").val()
 	
-	 var ss = $("#sel1").val().toString()
-	 alert(ss);
 	     
      var Node_Type =document.getElementById("sel1");
      var index=Node_Type.selectedIndex;
@@ -497,9 +492,10 @@ body {
              IP:IP,
              Node_Type_Test:Node_Type_Test
          },
-             success:function () {
-             
-         alert("创建成功！！");
+             success:function (data){
+               $("#text_show").empty()
+	           $("#text_show").val(data);
+	           $("#myModal123").modal('show');
           }
           })
      $("#Node_Name").val("");
@@ -532,8 +528,9 @@ body {
              
          },
          success:function (data) {
-          $("#text_show").val(data);
-         $("#myModal123").modal('show');
+         	$("#text_show").empty();
+            $("#text_show").val(data);
+            $("#myModal123").modal('show');
          },
          error:function () {
          }
@@ -606,6 +603,9 @@ body {
              Diskless_node:Diskless_node
          },
          success:function (data) {
+         	$("#text_show").empty();
+            $("#text_show").val(data);
+            $("#myModal123").modal('show');
          //$("#double").val(data);
           //赋值
          },
