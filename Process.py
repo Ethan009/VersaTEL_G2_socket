@@ -228,6 +228,7 @@ class Process_data():
         select_sql = "SELECT LV FROM thinlvtb"
         return self.sql_fetch_all(select_sql)
 
+
     def get_option_node(self):
         list_node = self.get_online_node()  # E.g:[('klay1',), ('klay2',)]
         list_result = []
@@ -281,3 +282,11 @@ class Process_data():
         dict_all = {"lvm": list_vg, "thin_lvm": list_thinlv}
         print(dict_all)
         return dict_all
+    
+    def get_option_nodenum(self):
+        num_node = int(self.get_node_num()[0]) + 1
+        list_result = []
+        for i in range(1,num_node):
+            dict_one = {'key_nodenum':i}
+            list_result.append(dict_one)
+        return list_result
