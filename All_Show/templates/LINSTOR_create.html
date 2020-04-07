@@ -488,7 +488,7 @@ body {
 
 
 		<!-- 模态框 -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="myModal123" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -543,6 +543,7 @@ body {
              Node_Type_Test:Node_Type_Test
          },
              success:function () {
+             
          alert("创建成功！！");
           }
           })
@@ -577,7 +578,8 @@ body {
              
          },
          success:function (data) {
-         alert(data);
+          $("#double").val(data);
+         $("#myModal123").modal('show');
          },
          error:function () {
          }
