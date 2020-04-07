@@ -23,11 +23,12 @@
 <style type="text/css">
 body {
 	padding: 10px;
+
 }
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row clearfix">
 			<!-- ------------------------ -->
 			<div class="col-md-12 column col-sm-2">
@@ -249,43 +250,7 @@ body {
 					$('#select_one').selectpicker({width:105});
 					</script>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-2 c">Node</label>
-					<div class="col-sm-10 ">
-						<select id='Node_one' name='Node_one' multiple
-							class="selectpicker" data-live-search="true">
-						</select>
-					</div>
-
-					<script type="text/javascript">
-					$('#Node_one').selectpicker({width:200});
-					
-				    $(function() {
-                            $.ajax({
-                                url: "/test",
-                                type: "get",
-                                dataType: "json",
-                                success: function(data) {
-                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
-                                      $('#Node_Two').html(""); 
-                                    var html = "";
-                                    for(i in data) {
-                                     html += '<option value=' + data[i].cityName + '>' + data[i].cityName + '</option>'
-                                    }
-                                      $('#Node_Two').append(html);  
-                                            // 缺一不可
-							        $('#Node_Two').selectpicker('refresh');
-							        $('#Node_Two').selectpicker('render');
-                                }
-                            });
-                            });
-                             $(window).on('load', function () {
-							    $('#Node_Two').selectpicker({
-							        'selectedText': 'cat'
-							    });
-							});
-					</script>
-				</div>
+				
 
 				<div class="form-group">
 					<label class="col-sm-2 ">Storage pool</label>
@@ -548,7 +513,6 @@ body {
      var Node_One =document.getElementById("Node");
      var index = Node_One.selectedIndex;
      var Node_One_Text = Node_One.options[index].text;
-     
      
      var radio_text = $("input[name='gender']:checked").val();
 
