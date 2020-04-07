@@ -58,14 +58,16 @@ def LINSTOR_message():
                 print(list(data.values())[3])
                 
             
-                str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s"%(data['SP_Name'],data['Node_One_Text'],data['lvm_name'],data['lv_Text'])
+                str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s -gui"%(data['SP_Name'],data['Node_One_Text'],data['lvm_name'],data['lv_Text'])
                 print(str_cmd)
-                import pickle
-                sessage = vst.conn(pickle.dumps(str_cmd))
-
+                str_cmd = str_cmd.encode()
+                sessage = vst.conn(str_cmd)
                 print("sessage:",sessage)
                 break
 
-        return sessage
+        if sessage == True:
+            return 'SUCCESS'
+        else:
+            return sessage
     else:
         return "test"
