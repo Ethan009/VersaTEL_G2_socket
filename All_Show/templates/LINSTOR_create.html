@@ -303,7 +303,7 @@ body {
 					
 				    $(function() {
                             $.ajax({
-                                url: "/testthree",
+                                url: "/sp",
                                 type: "get",
                                 dataType: "json",
                                 success: function(data) {
@@ -313,9 +313,11 @@ body {
                                     for(i in data) {
                                     var NName = data[i].NodeName
                                     var device_name = data[i].Spool
+                                    html += '<optgroup label='+NName+'>'
                                     for(a in device_name){
-                                     html += '<optgroup label='+NName+'>'+'<option value=' + device_name[a].device_name + '>' + device_name[a].device_name + '</option>'+'</optgroup>'
+                                     html += '<option value=' + device_name[a].key_sp + '>' + device_name[a].key_sp + '</option>'
                                     }
+                                    html += '</optgroup>'
                                     }
                                       $('#Storage_pool').append(html);  
                                             // 缺一不可
@@ -495,23 +497,12 @@ body {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+						<h4 class="modal-title" id="myModalLabel"></h4>
 					</div>
 					<div class="modal-body">
-						<div class="progress progress-striped active">
-							<div id="prog" class="progress-bar" role="progressbar"
-								aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
-								style="width: 0%;">
-								<span id="monthTotal">${itsmStatisticMonth.sumCount}</span>
-							</div>
-						</div>
-						<input type="text" id="double" name="double" value="">
+						<textarea class="form-control" id="text_show"></textarea>
 					</div>
-					<div class="modal-footer">
-						<button type="button" id="newcreate" class="btn btn-default"
-							data-dismiss="modal">再次创建</button>
-						<input type="button" class="btn btn-default" value="查看表格" id="see">
-					</div>
+				
 
 				</div>
 				<!-- /.modal-content -->
@@ -578,7 +569,7 @@ body {
              
          },
          success:function (data) {
-          $("#double").val(data);
+          $("#text_show").val(data);
          $("#myModal123").modal('show');
          },
          error:function () {
