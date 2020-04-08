@@ -28,4 +28,4 @@ def conn(ex_cmd):
         bytes_recd = bytes_recd + len(chunk)
         if bytes_recd == data_len:break
     client.send(b'exit')
-    return  (pickle.loads(b''.join(chunks)))
+    return (pickle.loads(b''.join(chunks)))

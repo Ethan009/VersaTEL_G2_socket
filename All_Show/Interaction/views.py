@@ -28,12 +28,13 @@ def send_message():
             data.update(data_one_dict)
         for i in  data.keys():
             if i in Host_create:
-                str_cmd = "python3 vtel_iscsi.py iscsi host create %s %s" % (data[Host_Name], data[Host_iqn])
+                str_cmd = "python3 vtel_iscsi.py iscsi host create %s %s -gui gui" % (data["Host_Name"], data["Host_iqn"])
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 print("CLI_result:", CLI_result)
                 break
-        return CLI_result
+        return 'SUCCESS' if CLI_result == True else 'Failed'
+
     else:
         return "test"
 
