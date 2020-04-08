@@ -31,10 +31,23 @@ def send_message():
                 str_cmd = "python3 vtel_iscsi.py iscsi host create %s %s -gui gui" % (data["Host_Name"], data["Host_iqn"])
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
-                print("CLI_result:", CLI_result)
                 break
+            elif i in DiskGroup_create:
+                str_cmd = "python3 vtel_iscsi.py iscsi diskgroup create %s %s -gui gui" % (data["HostGroup_Name"], data["Host"])
+                str_cmd = str_cmd.encode()
+                CLI_result = vst.conn(str_cmd)
+                break
+            elif i in HostGroup_create:
+                str_cmd = "python3 vtel_iscsi.py iscsi hostgroup create %s %s -gui gui" % (data["DiskGroup_Name"], data["Disk"])
+                str_cmd = str_cmd.encode()
+                CLI_result = vst.conn(str_cmd)
+                break
+            elif i in Map_create:
+                str_cmd = "python3 vtel_iscsi.py iscsi map create %s hg %s dg %s -gui gui" % (data["Map_Name"], data["Host_Group"], data["Disk_Group"])
+                str_cmd = str_cmd.encode()
+                CLI_result = vst.conn(str_cmd)
+                break   
         return 'SUCCESS' if CLI_result == True else 'Failed'
-
     else:
         return "test"
 
@@ -73,7 +86,6 @@ def LINSTOR_message():
                 break
 
         return 'SUCCESS' if CLI_result == True else  CLI_result
-
             
     else:
         return "request failed"
