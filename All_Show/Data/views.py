@@ -17,7 +17,7 @@ message_get_ll = None
 global lvm 
 global sp
 global node_create
- global node_num
+global node_num
 
 @datablue.route('/node', methods=['GET', 'POST'])  # 路由
 def data_two():
@@ -79,14 +79,12 @@ def data_test():
    # print('1:',pc.get_option_lvm())
     lvm = pc.get_option_lvm()
     node_create = pc.get_option_node()
-    print("node_create:",node_create);
-
-
+    #print("node_create:",node_create);
     sp = pc.get_option_sp()
-    print("sp:",sp)
+    #print("sp:",sp)
     #node_num = pc.get_option_nodenum()
     #print(pc.get_option_sp())#FOR create resource
-    
+    node_num=pc.get_option_nodenum()
     return "response"
 
 
@@ -127,7 +125,7 @@ def node_create():
 @datablue.route('/node_num', methods=['GET', 'POST'])  # 路由
 def node_num():
     global node_num
-   
+    print ('node_num',node_num)
     response = make_response(jsonify(node_num))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'

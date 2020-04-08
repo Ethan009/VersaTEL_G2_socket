@@ -353,16 +353,17 @@ body {
 					$('#Node_Num').selectpicker({width:100});
 					   $(function() {
                             $.ajax({
-                                url: "/test",
+                                url: "/node_num",
                                 type: "get",
                                 dataType: "json",
                                 success: function(data) {
                                     //var _data = data.data; //由于后台传过来的json有个data，在此重命名
                                       $('#Node_Num').html(""); 
                                     var html = "";
-                                    var lvm =data.lvm
-                                    for(i in lvm) {
-                                     html += '<option value=' + lvm[i].cityName + '>' + lvm[i].cityName + '</option>'
+                            		
+                                    for(i in data) {
+                                    
+                                     html += '<option value=' + data[i].key_nodenum + '>' + data[i].key_nodenum + '</option>'
                                     }
                                       $('#Node_Num').append(html);  
                                             // 缺一不可
@@ -611,7 +612,9 @@ body {
              Node_Num:Node_Num
          },
          success:function (data) {
-
+         	$("#text_show").empty();
+            $("#text_show").val(data);
+            $("#myModal123").modal('show');
          //$("#double").val(data);
           //赋值
          },
