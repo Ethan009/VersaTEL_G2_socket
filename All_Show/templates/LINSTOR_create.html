@@ -235,8 +235,9 @@ body {
 				<div class="form-group">
 					<label for="inputPassword" class="col-sm-2 control-label">Size</label>
 					<div class="col-sm-1">
-						<input type="text" class="form-control" id="Size_one"
-							placeholder="请输入" style="width: 100px;" value="">
+						<input type="text" class="form-control" id="Size_one" placeholder="请输入" style="width: 100px;"
+                               value=""οnkeyup="if(isNaN(value))execCommand('undo')"
+                               onafterpaste="if(isNaN(value))execCommand('undo')">
 					</div>
 					<div class="col-sm-9">
 						<select class="selectpicker" id="select_one">
