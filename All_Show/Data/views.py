@@ -86,7 +86,8 @@ def data_test():
     node_create = pc.get_option_node()
     # print("node_create:",node_create);
     sp = pc.get_option_sp()
-    # print("sp:",sp)
+
+    print("sp:",sp)
     # node_num = pc.get_option_nodenum()
     # print(pc.get_option_sp())#FOR create resource
     node_num = pc.get_option_nodenum()
@@ -137,6 +138,15 @@ def node_num():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
-##############################
+
+
+
+###########
+#sp: [{'NodeName': 'klay1', 'Spool': [{'key_sp': 'SSS'}, {'key_sp': 'XXX'}, {'key_sp': 'dddddddd'}, {'key_sp': 'ethan1'}, {'key_sp': 'ethan2'}, {'key_sp': 'pool_hdd'}, {'key_sp': 'pool_test2'}, {'key_sp': 'poollvt'}, {'key_sp': 'poolvg1'}, {'key_sp': 'vince9'}]}, {'NodeName': 'klay2', 'Spool': [{'key_sp': 'pllo'}, {'key_sp': 'pool_hdd'}]}]
+
+
+
+
+###################
 #
 
