@@ -7,7 +7,7 @@ Created on 2020/3/2
 
 from flask import Flask, jsonify, render_template, request, make_response
 from All_Show.Data import datablue
-
+import VersaTELSocket as vst
 import json
 from flask_cors import *
 import Process
@@ -18,6 +18,7 @@ global lvm
 global sp
 global node_create
 global node_num
+
 
 @datablue.route('/node', methods=['GET', 'POST'])  # 路由
 def data_two():
@@ -60,8 +61,12 @@ def data_four():
 
 @datablue.route('/configuration_data', methods=['GET', 'POST'])  # 路由
 def data_configuration():
-    configuration = JSON_Operation().read_data_json()
-    response = make_response(jsonify(configuration))
+    
+    str_cmd = "python3 vtel_iscsi.py iscsi show js" 
+    str_cmd = str_cmd.encode()
+    CLI_result = vst.conn(str_cmd)
+    print("CLI_result:",CLI_result)
+    response = make_response(jsonify(CLI_result))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
@@ -79,19 +84,18 @@ def data_test():
    # print('1:',pc.get_option_lvm())
     lvm = pc.get_option_lvm()
     node_create = pc.get_option_node()
-    #print("node_create:",node_create);
+    # print("node_create:",node_create);
     sp = pc.get_option_sp()
-    #print("sp:",sp)
-    #node_num = pc.get_option_nodenum()
-    #print(pc.get_option_sp())#FOR create resource
-    node_num=pc.get_option_nodenum()
+    # print("sp:",sp)
+    # node_num = pc.get_option_nodenum()
+    # print(pc.get_option_sp())#FOR create resource
+    node_num = pc.get_option_nodenum()
     return "response"
 
 
 @datablue.route('/lvm', methods=['GET', 'POST'])  # 路由
 def lvm():
     global lvm
-    print('2:',lvm);
     response = make_response(jsonify(lvm))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -102,7 +106,7 @@ def lvm():
 
 @datablue.route('/sp', methods=['GET', 'POST'])  # 路由
 def sp():
-    #global node
+    # global node
     global sp
     response = make_response(jsonify(sp))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
@@ -111,10 +115,10 @@ def sp():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
+
 @datablue.route('/node_create', methods=['GET', 'POST'])  # 路由
 def node_create():
     global node_create
-   
     response = make_response(jsonify(node_create))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -122,10 +126,10 @@ def node_create():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
+
 @datablue.route('/node_num', methods=['GET', 'POST'])  # 路由
 def node_num():
     global node_num
-    print ('node_num',node_num)
     response = make_response(jsonify(node_num))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
