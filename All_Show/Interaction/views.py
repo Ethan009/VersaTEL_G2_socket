@@ -72,7 +72,7 @@ def LINSTOR_message():
                 CLI_result = vst.conn(str_cmd)
                 break
 
-        return 'SUCCESS' if CLI_result == True else return CLI_result
+        return 'SUCCESS' if CLI_result == True else  CLI_result
             
             
     else:
