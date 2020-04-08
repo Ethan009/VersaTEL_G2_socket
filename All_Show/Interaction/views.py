@@ -28,24 +28,23 @@ def send_message():
             data.update(data_one_dict)
         for i in  data.keys():
             if i in Host_create:
-                str_cmd = "python3 vtel_iscsi.py iscsi host create %s %s"%(data[Host_Name],data[Host_iqn])
-                str_cmd=str_cmd.encode()
+                str_cmd = "python3 vtel_iscsi.py iscsi host create %s %s" % (data[Host_Name], data[Host_iqn])
+                str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
-                print("CLI_result:",CLI_result)
+                print("CLI_result:", CLI_result)
                 break
         return CLI_result
     else:
         return "test"
-        
 
     
 @interaction_blue.route('/LINSTOR_message', methods=['GET'])
 def LINSTOR_message():
     Node = ['Node_Name', 'IP', 'Node_Type_Test']
-    Storage_pool = ['SP_Name', 'Node_One_Text', 'lvm_name','lv_Text']
+    Storage_pool = ['SP_Name', 'Node_One_Text', 'lvm_name', 'lv_Text']
 
-    Resurce_auto = ['Resource_Name_two','size_two','select_two','Node_Num']
-    data={}
+    Resurce_auto = ['Resource_Name_two', 'size_two', 'select_two', 'Node_Num']
+    data = {}
     if request.method == 'GET':
         data_all = request.args.items()
         for i in data_all:
@@ -55,25 +54,25 @@ def LINSTOR_message():
             data.update(data_one_dict)
         for i in  data.keys():
             if i in Node:
-                str_cmd = "python3 vtel.py stor n c %s -ip %s -nt %s -gui"%(data['Node_Name'],data['IP'],data['Node_Type_Test'])
-                str_cmd=str_cmd.encode()
+                str_cmd = "python3 vtel.py stor n c %s -ip %s -nt %s -gui" % (data['Node_Name'], data['IP'], data['Node_Type_Test'])
+                str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
 
             elif i in Storage_pool:
-                str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s -gui"%(data['SP_Name'],data['Node_One_Text'],data['lvm_name'],data['lv_Text'])
+                str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s -gui" % (data['SP_Name'], data['Node_One_Text'], data['lvm_name'], data['lv_Text'])
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
  
             elif i in Resurce_auto:
-                str_cmd = "python3 vtel.py stor r c %s -s %s%s -a -num %d -gui"%(data['Resource_Name_two'],data['size_two'],data['select_two'],int(data['Node_Num']))
+                str_cmd = "python3 vtel.py stor r c %s -s %s%s -a -num %d -gui" % (data['Resource_Name_two'], data['size_two'], data['select_two'], int(data['Node_Num']))
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
 
         return 'SUCCESS' if CLI_result == True else  CLI_result
-            
+
             
     else:
         return "request failed"
