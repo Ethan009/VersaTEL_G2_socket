@@ -65,7 +65,7 @@ def data_configuration():
     str_cmd = "python3 vtel_iscsi.py iscsi show js" 
     str_cmd = str_cmd.encode()
     CLI_result = vst.conn(str_cmd)
-    print("CLI_result:",CLI_result)
+   
     response = make_response(jsonify(CLI_result))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'

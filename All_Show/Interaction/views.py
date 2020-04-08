@@ -32,18 +32,20 @@ def send_message():
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
-            elif i in DiskGroup_create:
-                str_cmd = "python3 vtel_iscsi.py iscsi diskgroup create %s %s -gui gui" % (data["HostGroup_Name"], data["Host"])
+            elif i in HostGroup_create:
+                hostgroup = data['Host'].replace(',',' ')
+                str_cmd = "python3 vtel_iscsi.py iscsi hostgroup create %s %s -gui gui" % (data["HostGroup_Name"], hostgroup)
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
-            elif i in HostGroup_create:
-                str_cmd = "python3 vtel_iscsi.py iscsi hostgroup create %s %s -gui gui" % (data["DiskGroup_Name"], data["Disk"])
+            elif i in DiskGroup_create:
+                diskgroup = data['Disk'].replace(',',' ')
+                str_cmd = "python3 vtel_iscsi.py iscsi diskgroup create %s %s -gui gui" % (data["DiskGroup_Name"], diskgroup)
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break
             elif i in Map_create:
-                str_cmd = "python3 vtel_iscsi.py iscsi map create %s hg %s dg %s -gui gui" % (data["Map_Name"], data["Host_Group"], data["Disk_Group"])
+                str_cmd = "python3 vtel_iscsi.py iscsi map create %s -hg %s -dg %s -gui gui" % (data["Map_Name"], data["Host_Group"], data["Disk_Group"])
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
                 break   
