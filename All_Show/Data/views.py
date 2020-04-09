@@ -19,21 +19,21 @@ global sp
 global node_create
 global node_num
 
-
+ 
 @datablue.route('/node', methods=['GET', 'POST'])  # 路由
 def data_two():
 # 
     pc = Process.Process_data()
     data_two_lict = pc.process_data_node()
-    
+     
     response = make_response(jsonify(data_two_lict))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/resource', methods=['GET', 'POST'])  # 路由
 def data_three():
     # import LINSTORDB as db
@@ -45,8 +45,8 @@ def data_three():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/storagepool', methods=['GET', 'POST'])  # 路由
 def data_four():
     pc = Process.Process_data()
@@ -57,23 +57,23 @@ def data_four():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/configuration_data', methods=['GET', 'POST'])  # 路由
 def data_configuration():
-    
+     
     str_cmd = "python3 vtel_iscsi.py iscsi show js" 
     str_cmd = str_cmd.encode()
     CLI_result = vst.conn(str_cmd)
-   
+    
     response = make_response(jsonify(CLI_result))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/socket', methods=['GET', 'POST'])  # 路由
 def data_test():
     global lvm
@@ -81,19 +81,13 @@ def data_test():
     global sp
     global node_num
     pc = Process.Process_data()
-   # print('1:',pc.get_option_lvm())
     lvm = pc.get_option_lvm()
     node_create = pc.get_option_node()
-    # print("node_create:",node_create);
     sp = pc.get_option_sp()
-
-    print("sp:",sp)
-    # node_num = pc.get_option_nodenum()
-    # print(pc.get_option_sp())#FOR create resource
     node_num = pc.get_option_nodenum()
     return "response"
-
-
+ 
+ 
 @datablue.route('/lvm', methods=['GET', 'POST'])  # 路由
 def lvm():
     global lvm
@@ -103,8 +97,8 @@ def lvm():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/sp', methods=['GET', 'POST'])  # 路由
 def sp():
     # global node
@@ -115,8 +109,8 @@ def sp():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/node_create', methods=['GET', 'POST'])  # 路由
 def node_create():
     global node_create
@@ -126,8 +120,8 @@ def node_create():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
+ 
+ 
 @datablue.route('/node_num', methods=['GET', 'POST'])  # 路由
 def node_num():
     global node_num
@@ -137,16 +131,4 @@ def node_num():
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
-
-
-
-
-###########
-#sp: [{'NodeName': 'klay1', 'Spool': [{'key_sp': 'SSS'}, {'key_sp': 'XXX'}, {'key_sp': 'dddddddd'}, {'key_sp': 'ethan1'}, {'key_sp': 'ethan2'}, {'key_sp': 'pool_hdd'}, {'key_sp': 'pool_test2'}, {'key_sp': 'poollvt'}, {'key_sp': 'poolvg1'}, {'key_sp': 'vince9'}]}, {'NodeName': 'klay2', 'Spool': [{'key_sp': 'pllo'}, {'key_sp': 'pool_hdd'}]}]
-
-
-
-
-###################
-#
 
