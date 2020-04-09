@@ -30,7 +30,7 @@ body {
 	<div class="container">
 		<div class="row clearfix">
 			<!-- ------------------------ -->
-			<div class="col-md-12 column col-sm-2">
+			<div class="col-md-12 ">
 				<div class="page-header">
 					<h1>操作区</h1>
 					<h1>
@@ -73,7 +73,6 @@ body {
 					</div>
 				</div>
 			</div>
-
 			<!---------------------------->
 			<div class="col-md-12 ">
 				<div class="page-header">
@@ -216,7 +215,7 @@ body {
 
 			</div>
 			<!-- ------------------------ -->
-			<div class="col-md-12 column">
+			<div class="col-md-12 ">
 
 				<div class="page-header">
 					<h1>
@@ -234,8 +233,9 @@ body {
 				<div class="form-group">
 					<label for="inputPassword" class="col-sm-2 control-label">Size</label>
 					<div class="col-sm-1">
-						<input type="text" class="form-control" id="Size_one"
-							placeholder="请输入" style="width: 100px;" value="">
+						<input type="text" class="form-control" id="Size_one" placeholder="请输入" style="width: 100px;"
+                               value=""οnkeyup="if(isNaN(value))execCommand('undo')"
+                               onafterpaste="if(isNaN(value))execCommand('undo')">
 					</div>
 					<div class="col-sm-9">
 						<select class="selectpicker" id="select_one">
@@ -304,7 +304,7 @@ body {
 
 			</div>
 			<!-- ------------------------ -->
-			<div class="col-md-12 column col-sm-2">
+			<div class="col-md-12 ">
 				<div class="page-header">
 					<h1>
 						<small>Resource(auto)</small>
@@ -380,8 +380,7 @@ body {
 				</div>
 			</div>
 			<!-- ------------------------ -->
-
-			<div class="col-md-12 column">
+			<div class="col-md-12 ">
 
 				<div class="page-header">
 					<h1>
