@@ -90,6 +90,7 @@ def LINSTOR_message():
             elif i in Resource_mirror:
                 node_val = str(data['Storage_pool_val']).replace(',',' ')
                 sp_val = str(data['sp']).strip(",").replace(',',' ')
+
                 str_cmd = "python3 vtel.py stor r c %s -am -n %s -sp %s -gui" %(data['Resource_Name_one'],node_val,sp_val)
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
