@@ -11,7 +11,6 @@ import VersaTELSocket as vst
 import json
 from flask_cors import *
 import Process
-from iscsi_json import JSON_Operation
 
 message_get_ll = None
 global lvm 
@@ -22,12 +21,9 @@ global node_num
  
 @datablue.route('/node', methods=['GET', 'POST'])  # 路由
 def data_two():
-# 
     pc = Process.Process_data()
     data_two_lict = pc.process_data_node()
-     
     response = make_response(jsonify(data_two_lict))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'

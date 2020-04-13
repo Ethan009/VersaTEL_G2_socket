@@ -7,10 +7,8 @@ class Process_data():
     def __init__(self):
         self.linstor_db = db.LINSTORDB()
         self.cur = self.linstor_db.cur
-        # self.CRM = db.PacemakerDB()
 
     def process_data_node(self):
-        # cur = self.linstor_db.cur
         cur = self.cur
         date = []
         def _count_node():

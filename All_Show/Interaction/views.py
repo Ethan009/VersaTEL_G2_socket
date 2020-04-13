@@ -19,10 +19,8 @@ def send_message():
     DiskGroup_create = ['DiskGroup_Name', 'Disk']
     Map_create = ['Map_Name', 'Disk_Group', 'Host_Group']
     data = {}
-    # 键值对
     if request.method == 'GET':
         data_all = request.args.items()
-        print("data_all:", data_all)
         for i in data_all:
             data_one_dict = {i[0]:i[1]}
             data.update(data_one_dict)
@@ -85,7 +83,6 @@ def LINSTOR_message():
                 str_cmd = "python3 vtel.py stor r c %s -s %s%s -n %s -sp %s -gui" %(data['Resource_Name_one'],data['size_one'],data['select_one'],node_val,sp_val)
                 str_cmd = str_cmd.encode()
                 CLI_result = vst.conn(str_cmd)
-                print('CLI_result:',CLI_result)
                 break
             elif i in Resource_mirror:
                 node_val = str(data['Storage_pool_val']).replace(',',' ')
