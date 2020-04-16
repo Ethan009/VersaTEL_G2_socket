@@ -60,7 +60,6 @@ class LINSTORView(views.MethodView):
         sp = pc.get_option_sp()
         node_create = pc.get_option_node()
         node_num = pc.get_option_nodenum()
-       
         return 'Test'
 
 class lvmView(views.MethodView):  

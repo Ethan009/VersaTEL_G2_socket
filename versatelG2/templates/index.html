@@ -184,7 +184,22 @@
 			url:"/socket",
 			type:"get",
 			success:function(){
-				alert("connect success");
+			 $.ajax({
+                      url: "/lvm",
+                      type: "get",
+                      success: function() {}}),
+             $.ajax({
+                      url: "/sp",
+                      type: "get",
+                      success: function() {}}),
+             $.ajax({
+                      url: "/node_create",
+                      type: "get",
+                      success: function() {}}),
+            $.ajax({
+                      url: "/node_num",
+                      type: "get",
+                      success: function() {}})
 			}
 		});
 	});
