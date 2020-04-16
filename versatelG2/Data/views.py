@@ -5,8 +5,8 @@ Created on 2020/3/2
 @note: data
 '''
 
-from flask import Flask, jsonify, render_template, request, make_response
-from All_Show.Data import datablue
+from flask import Flask, jsonify, render_template, request, make_response,views
+from versatelG2.Data import datablue
 import VersaTELSocket as vst
 import json
 from flask_cors import *
@@ -18,20 +18,31 @@ global sp
 global node_create
 global node_num
 
- 
-@datablue.route('/node', methods=['GET', 'POST'])  # 路由
-def data_two():
-    pc = Process.Process_data()
-    data_two_lict = pc.process_data_node()
+
+def data(data_two):
     response = make_response(jsonify(data_two_lict))
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
- 
+
+@datablue.route('/node', methods=['GET', 'POST'])  # 路由
+def nodeInit():
+    pc = Process.Process_data()
+    data_two_lict = pc.process_data_node()
+    return data(data_two_lict)
+
+
+class nodeView(views.MethodView):
+    def get(self):
+        pc = Process.Process_data()
+        data_two_lict = pc.process_data_node()
+        return data(data_two_lict)
+
+datablue.add_url_rule('/node/', view_func=LoginView.as_view('nodeview'))
  
 @datablue.route('/resource', methods=['GET', 'POST'])  # 路由
-def data_three():
+def resourceInit():
     # import LINSTORDB as db
     pc = Process.Process_data()
     data_three_lict = pc.process_data_resource()
@@ -44,7 +55,7 @@ def data_three():
  
  
 @datablue.route('/storagepool', methods=['GET', 'POST'])  # 路由
-def data_four():
+def spInit():
     pc = Process.Process_data()
     data_four_lict = pc.process_data_stp()
     response = make_response(jsonify(data_four_lict))
@@ -76,6 +87,7 @@ def data_test():
     global node_create
     global sp
     global node_num
+
     pc = Process.Process_data()
     lvm = pc.get_option_lvm()
     node_create = pc.get_option_node()
@@ -97,10 +109,8 @@ def lvm():
  
 @datablue.route('/sp', methods=['GET', 'POST'])  # 路由
 def sp():
-    # global node
     global sp
     response = make_response(jsonify(sp))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
@@ -111,7 +121,6 @@ def sp():
 def node_create():
     global node_create
     response = make_response(jsonify(node_create))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
@@ -122,7 +131,7 @@ def node_create():
 def node_num():
     global node_num
     response = make_response(jsonify(node_num))
-    # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'

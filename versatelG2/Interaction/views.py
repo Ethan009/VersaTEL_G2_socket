@@ -1,7 +1,7 @@
 # coding:utf-8
 
 from flask import Flask, jsonify, render_template, request, make_response, Blueprint
-from All_Show.Interaction import interaction_blue
+from versatelG2.Interaction import interaction_blue
 import VersaTELSocket as vst
 import json
 from flask_cors import *
@@ -9,7 +9,7 @@ from flask_cors import *
 import sys
 
 sys.path.append("../")
-from All_Show import Models
+from versatelG2 import Models
 
 
 @interaction_blue.route('/send_message', methods=['GET'])

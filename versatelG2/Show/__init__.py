@@ -10,4 +10,4 @@ from flask import Flask,Blueprint
 
 showblue = Blueprint("showblue", __name__)
 
-from All_Show.Show import views
+from versatelG2.Show import views

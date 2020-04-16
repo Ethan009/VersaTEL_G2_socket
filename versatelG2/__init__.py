@@ -7,9 +7,9 @@ Created on 2020/3/2
 
 from flask import Flask, Blueprint
 
-from All_Show.Data import datablue
-from All_Show.Show import showblue
-from All_Show.Interaction import interaction_blue
+from versatelG2.Data import datablue
+from versatelG2.Show import showblue
+from versatelG2.Interaction import interaction_blue
 
 app = Flask(__name__)
 
