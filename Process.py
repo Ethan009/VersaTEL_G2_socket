@@ -1,16 +1,30 @@
 #coding:utf-8
-import LinstorDB as db
 import sqlite3
+import VersaTELSocket as vst
 
-
-class Process_data():
+class LINSTORDB(object):
     def __init__(self):
-        self.linstor_db = db.LINSTORDB()
-        self.cur = self.linstor_db.cur
-        # self.CRM = db.PacemakerDB()
+        self.con = sqlite3.connect(':memory:',check_same_thread=False)
+        self.cur = self.con.cursor()
+        sql_script = vst.conn(b'python3 vtel.py stor gui -db')
+        self.cur.executescript(sql_script)
+
+    # delete database table
+    # def drop_tb(self):
+    #     drp_storagepooltb_sql = "drop table if exists storagepooltb"
+    #     drp_resourcetb_sql = "drop table if exists resourcetb"
+    #     drp_nodetb_sql = "drop table if exists nodetb"
+    #     self.cur.execute(drp_storagepooltb_sql)
+    #     self.cur.execute(drp_resourcetb_sql)
+    #     self.cur.execute(drp_nodetb_sql)
+    #     self.con.commit()
+
+
+class Process_data(LINSTORDB):
+    def __init__(self):
+        LINSTORDB.__init__(self)
 
     def process_data_node(self):
-        # cur = self.linstor_db.cur
         cur = self.cur
         date = []
         def _count_node():
@@ -196,8 +210,6 @@ class Process_data():
         date_set = cur.fetchone()
         return date_set
 
-        # 获取表全部数据的通用方法
-
     def sql_fetch_all(self, sql):
         cur = self.cur
         cur.execute(sql)
@@ -206,6 +218,8 @@ class Process_data():
 
     '''[{"cityName":"Node1"}, {"cityName":"Node2"}, {"cityName":"Node3"}, {"cityName":"Node4"}]
     '''
+
+    #不定参参数，返回结果
 
     def get_online_node(self):
         select_sql = "SELECT Node FROM nodetb WHERE State = 'Online'"

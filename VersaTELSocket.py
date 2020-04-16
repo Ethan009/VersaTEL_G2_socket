@@ -1,14 +1,11 @@
 #coding:utf-8
 
-import socket,timeit,datetime
-import pickle
+import socket,pickle
 
 ip_port = ('10.203.1.89',12144)
 judge_len = 8192
 
-
 command=b'CLIcommands'
-
 
 def conn(ex_cmd):
     client=socket.socket()
