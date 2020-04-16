@@ -184,24 +184,7 @@
 			url:"/socket",
 			type:"get",
 			success:function(){
-			 $.ajax({
-                      url: "/lvm",
-                      type: "get",
-                      success: function() {}}),
-             $.ajax({
-                      url: "/sp",
-                      type: "get",
-                      success: function() {}}),
-             $.ajax({
-                      url: "/node_create",
-                      type: "get",
-                      success: function() {}}),
-            $.ajax({
-                      url: "/node_num",
-                      type: "get",
-                      success: function() {}})
-			}
-		});
+			window.parent.location.href="/LINSTOR_create";  
 	});
 
 
