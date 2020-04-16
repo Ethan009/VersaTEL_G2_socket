@@ -5,12 +5,13 @@ Created on 2020/3/2
 @note: data
 '''
 
-from flask import Flask, jsonify, render_template, request, make_response
+from flask import Flask, jsonify, render_template, request, make_response, views
 from All_Show.Data import datablue
 import VersaTELSocket as vst
 import json
 from flask_cors import *
 import Process
+from All_Show.Data import model
 
 message_get_ll = None
 global lvm 
@@ -18,16 +19,36 @@ global sp
 global node_create
 global node_num
 
- 
-@datablue.route('/node', methods=['GET', 'POST'])  # 路由
-def data_two():
-    pc = Process.Process_data()
-    data_two_lict = pc.process_data_node()
-    response = make_response(jsonify(data_two_lict))
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    return response
+#  
+# @datablue.route('/node', methods=['GET', 'POST'])  # 路由
+# def data_two():
+#     pc = Process.Process_data()
+#     data_two_lict = pc.process_data_node()
+#     response = make_response(jsonify(data_two_lict))
+#     response.headers['Access-Control-Allow-Origin'] = '*'
+#     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+#     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+#     return response
+
+
+# def data(data_two_lict):
+#     response = make_response(jsonify(data_two_lict))
+#     response.headers['Access-Control-Allow-Origin'] = '*'
+#     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+#     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+#     return response
+# 
+# 
+# class nodeView(views.MethodView):
+# 
+#     def get(self):
+# #         pc = Process.Process_data()
+# #         data_two_lict = pc.process_data_node()
+#         data_two_lict = {"ss":"ss"}
+#         return data(data_two_lict)
+
+
+datablue.add_url_rule('/node', view_func=model.nodeView.as_view('nodeview'))
  
  
 @datablue.route('/resource', methods=['GET', 'POST'])  # 路由
