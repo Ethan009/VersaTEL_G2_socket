@@ -1,6 +1,6 @@
 # coding:utf-8
 # coding:utf-8
-import LinstorDB as db
+
 import sqlite3
 import VersaTELSocket as vst
 
