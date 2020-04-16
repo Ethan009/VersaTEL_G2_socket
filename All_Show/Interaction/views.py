@@ -9,7 +9,6 @@ from flask_cors import *
 import sys
 
 sys.path.append("../")
-from All_Show import Models
 
 
 @interaction_blue.route('/send_message', methods=['GET'])
