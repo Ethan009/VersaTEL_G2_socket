@@ -1,8 +1,10 @@
 eclipse.preferences.version=1
+encoding//versatelG2/Data/__init__.py=utf-8
 encoding//versatelG2/Data/model.py=utf-8
 encoding//versatelG2/Data/views.py=utf-8
 encoding//versatelG2/Interaction/__init__.py=utf-8
 encoding//versatelG2/Interaction/views.py=utf-8
+encoding//versatelG2/Show/model.py=utf-8
 encoding//versatelG2/Show/views.py=utf-8
 encoding/Main.py=utf-8
 encoding/Process.py=utf-8
