@@ -10,7 +10,10 @@ import VersaTELSocket as vst
 import json
 from flask_cors import *
 import Process
-
+global lvm
+global sp
+global node_create
+global node_num
 
 def data(datadict):
     response = make_response(jsonify(datadict))
@@ -44,31 +47,40 @@ class iSCSIView(views.MethodView):
         CLI_result = vst.conn(str_cmd)
         return data(CLI_result)
 
-datalist=[]
+
 class LINSTORView(views.MethodView):
     def get(self):
+        global lvm
+        global sp
+        global node_create
+        global node_num
+
         pc = Process.Process_data()
         lvm = pc.get_option_lvm()
         sp = pc.get_option_sp()
         node_create = pc.get_option_node()
         node_num = pc.get_option_nodenum()
-        datalist = [lvm,sp,node_create,node_num]
+       
         return 'Test'
 
 class lvmView(views.MethodView):  
     def get(self):
-        return data(datalist[0])
+        global lvm
+        return data(lvm)
  
 class spView(views.MethodView):  
     def get(self):
-        return data(datalist[1])
+        global sp
+        return data(sp)
     
 class nodecreateView(views.MethodView):  
     def get(self):
-        return data(datalist[2])
+        global node_create
+        return data(node_create)
 
 class nodenumView(views.MethodView):  
     def get(self):
-        return data(datalist[3])
+        global node_num
+        return data(node_num)
    
     

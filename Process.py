@@ -5,7 +5,7 @@ import sqlite3
 class LINSTORDB():
 
     def __init__(self):
-        self.con = sqlite3.connect(':memory:', check_same_thread=False, timeout=10)
+        self.con = sqlite3.connect(':memory:', check_same_thread=False)
         self.cur = self.con.cursor()
 
 

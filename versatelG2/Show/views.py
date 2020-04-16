@@ -7,6 +7,7 @@ Created on 2020/3/2
 
 from flask import Flask, jsonify, render_template, request, make_response,views
 from versatelG2.Show import showblue
+from versatelG2.Show import model
 
 showblue.add_url_rule('/', view_func=model.indexView.as_view('indexview'))
 showblue.add_url_rule('/iSCSI_create', view_func=model.iSCSIcreateView.as_view('iSCSIcreateview'))
