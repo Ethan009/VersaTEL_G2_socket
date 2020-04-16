@@ -5,45 +5,18 @@ Created on 2020/3/2
 @note: data
 '''
 
-from flask import Flask, jsonify, render_template, request, make_response
-import json
-from flask_cors import *
+from flask import Flask, jsonify, render_template, request, make_response,views
 from versatelG2.Show import showblue
 
-
-@showblue.route('/', methods=['GET', 'POST'])
-def INDEX():
-    return render_template("index.html")
-
-@showblue.route('/iSCSI_create', methods=['GET', 'POST'])
-def iSCSI_CREATE():
-    return render_template("iSCSI_create.html")
-
-@showblue.route('/LINSTOR_create', methods=['GET', 'POST'])
-def LINSTOR_CREATE():
-    return render_template("LINSTOR_create.html")
-
-@showblue.route('/show', methods=['GET', 'POST'])
-def SHOW():
-    return render_template("show.html")
-
-@showblue.route('/Node', methods=['GET', 'POST'])
-def Node():
-    return render_template("Node.html")
-
-@showblue.route('/Resource', methods=['GET', 'POST'])
-def Resource():
-    return render_template("Resource.html")
-
-@showblue.route('/StoragePool', methods=['GET', 'POST'])
-def StoragePool():
-    return render_template("StoragePool.html")
+showblue.add_url_rule('/', view_func=model.indexView.as_view('indexview'))
+showblue.add_url_rule('/iSCSI_create', view_func=model.iSCSIcreateView.as_view('iSCSIcreateview'))
+showblue.add_url_rule('/LINSTOR_create', view_func=model.LINSTORcreateView.as_view('LINSTORcreateview'))
+showblue.add_url_rule('/show', view_func=model.showView.as_view('showview'))
+showblue.add_url_rule('/Node', view_func=model.NodeView.as_view('Nodeview'))
+showblue.add_url_rule('/Resource', view_func=model.ResourceView.as_view('Resourceview'))
+showblue.add_url_rule('/StoragePool', view_func=model.StoragePoolView.as_view('StoragePoolview'))
+showblue.add_url_rule('/Configuration', view_func=model.iSCSIShowView.as_view('iSCSIShowview'))
 
 
-@showblue.route('/iSCSI_Resource', methods=['GET', 'POST'])
-def iSCSI_Resource():
-    return render_template("iSCSI_Resource.html")
 
-@showblue.route('/Configuration', methods=['GET', 'POST'])
-def Configuration():
-    return render_template("Configuration.html")
+
