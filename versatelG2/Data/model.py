@@ -39,7 +39,7 @@ class spView(views.MethodView):
     
 class iSCSIView(views.MethodView):  
     def get(self):
-        str_cmd = "python3 vtel_iscsi.py iscsi show js" 
+        str_cmd = "python3 vtel.py iscsi show js" 
         str_cmd = str_cmd.encode()
         CLI_result = vst.conn(str_cmd)
         return data(CLI_result)
