@@ -31,7 +31,7 @@ class resourceView(views.MethodView):
         resourcedict = pc.process_data_resource()
         return data(resourcedict)
     
-class spView(views.MethodView):  
+class storagepoolView(views.MethodView):  
     def get(self):
         pc = Process.Process_data()
         spdict = pc.process_data_stp()
