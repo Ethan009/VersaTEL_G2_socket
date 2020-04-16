@@ -1,12 +1,17 @@
 # coding:utf-8
+# coding:utf-8
+import LinstorDB as db
 import sqlite3
+import VersaTELSocket as vst
 
 
-class LINSTORDB():
+class LINSTORDB(object):
 
     def __init__(self):
         self.con = sqlite3.connect(':memory:', check_same_thread=False)
         self.cur = self.con.cursor()
+        sql_script = vst.conn(b'python3 vtel.py stor gui -db')
+        self.cur.executescript(sql_script)
 
 
 class Process_data(LINSTORDB):
