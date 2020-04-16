@@ -12,6 +12,7 @@ sys.path.append("../")
 from versatelG2 import Models
 
 
+
 @interaction_blue.route('/send_message', methods=['GET'])
 def send_message():
     Host_create = ['Host_Name', 'Host_iqn']

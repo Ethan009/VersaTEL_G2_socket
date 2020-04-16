@@ -5,8 +5,8 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>layui在线调试</title>
-<link rel="stylesheet"
-	href="https://www.layuicdn.com/layui-v2.5.0/css/layui.css">
+<link href="{{ url_for('static',filename='layui.css') }}"
+	rel="stylesheet" type="text/css" />
 <style>
 body {
 	margin: 10px;
@@ -20,7 +20,7 @@ body {
 </style>
 </head>
 <body>
-<div class="page-header">
+	<div class="page-header">
 		<h1>
 			展示区 <small>表格</small>
 		</h1>
@@ -35,7 +35,7 @@ body {
 
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
-	<script src="https://www.layuicdn.com/layui/layui.js"></script>
+<script src="{{ url_for('static',filename='layui.js') }}"></script>
 	<script>
 
  layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'],
