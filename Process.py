@@ -163,13 +163,13 @@ class Process_data():
 
 
         for i in _select_storagepooltb():
-            stp_name, node_name, driver, pool_name, free_size, total_size, snapshots, status = i
+            stp_name, node_name, driver, pool_name, free_size, total_size, snapshots, sp_status = i
             res_num = _res_sum(str(node_name), str(stp_name))
             list_resdict = []
             for res in _res(str(node_name), str(stp_name)):
-                res_name, size, device_name, used, status = res
+                res_name, size, device_name, used, res_status = res
                 # Resource,Allocated,DeviceName,InUse,State FROM resourcetb where  StoragePool
-                dic = {"res_name": res_name, "size": size, "device_name": device_name, "used": used, "status": status}
+                dic = {"res_name": res_name, "size": size, "device_name": device_name, "used": used, "status": res_status}
                 list_resdict.append(dic)
 
             # 返回res_num 对应的几个resource信息，
@@ -181,7 +181,7 @@ class Process_data():
                      "free_size": free_size,
                      "total_size": total_size,
                      "snapshots": snapshots,
-                     "status": status,
+                     "status": sp_status,
                      "res_name_son": list_resdict}
             date.append(date_)
         dict = {"code": 0, "msg": "", "count": 1000, "data": date}

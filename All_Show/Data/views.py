@@ -49,8 +49,9 @@ def data_three():
  
 @datablue.route('/storagepool', methods=['GET', 'POST'])  # 路由
 def data_four():
-    pc = Process.Process_data()
+    pc = Process.Process_data() 
     data_four_lict = pc.process_data_stp()
+    ###
     response = make_response(jsonify(data_four_lict))
     # 这里是解决Flask文件数据跨域问题，重要包导入 pip install flask_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
