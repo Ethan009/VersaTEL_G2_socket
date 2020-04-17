@@ -6,7 +6,7 @@ Created on 2020/3/2
 @note: data
 '''
 
-from flask import Flask, jsonify, render_template, request, make_response,views
+from flask import Flask, render_template, views
 
 
 class indexView(views.MethodView):
@@ -24,6 +24,7 @@ class LINSTORcreateView(views.MethodView):
 class showView(views.MethodView):
     def get(self):
         return render_template("show.html")
+
 class NodeView(views.MethodView):
     def get(self):
         return render_template("Node.html")

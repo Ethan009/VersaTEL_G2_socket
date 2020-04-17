@@ -11,7 +11,6 @@ import sys
 sys.path.append("../")
 
 
-
 @interaction_blue.route('/send_message', methods=['GET'])
 def send_message():
     Host_create = ['Host_Name', 'Host_iqn']

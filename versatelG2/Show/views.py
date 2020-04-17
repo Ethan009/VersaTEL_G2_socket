@@ -5,7 +5,7 @@ Created on 2020/3/2
 @note: data
 '''
 
-from flask import Flask, jsonify, render_template, request, make_response,views
+from flask import Flask,views
 from versatelG2.Show import showblue
 from versatelG2.Show import model
 
