@@ -9,6 +9,7 @@ class sendmessageView(views.MethodView):
         DiskGroup_create = ['DiskGroup_Name', 'Disk']
         Map_create = ['Map_Name', 'Disk_Group', 'Host_Group']
         data = {}
+
         if request.method == 'GET':
             data_all = request.args.items()
             for i in data_all:
@@ -43,13 +44,14 @@ class sendmessageView(views.MethodView):
 
 class LINSTORmessageView(views.MethodView):
     def get(self):
-        Node = ['Node_Name', 'IP', 'Node_Type_Test']
-        Storage_pool = ['SP_Name', 'Node_One_Text', 'lvm_name', 'lv_Text']
-        Resource = ['Resource_Name_one','size_one','select_one','sp','Storage_pool_val']
-        Resource_mirror =['Resource_Name_one','sp','Storage_pool_val']
-        Resurce_auto = ['Resource_Name_two', 'size_two', 'select_two', 'Node_Num']
-        Diskless = ['Diskless_name','Diskless_node']
+        Node = ['Node_Name']
+        Storage_pool = ['SP_Name']
+        Resource = ['Resource_Name_one']
+        Resource_mirror =['Resource_Name_mirror']
+        Resurce_auto = ['Resource_Name_two']
+        Diskless = ['Diskless_name']
         data = {}
+
         if request.method == 'GET':
             data_all = request.args.items()
             for i in data_all:
@@ -58,38 +60,31 @@ class LINSTORmessageView(views.MethodView):
             for i in  data.keys():
                 if i in Node:
                     str_cmd = "python3 vtel.py stor n c %s -ip %s -nt %s -gui" % (data['Node_Name'], data['IP'], data['Node_Type_Test'])
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break
                 elif i in Storage_pool:
                     str_cmd = "python3 vtel.py stor sp c %s -n %s %s %s -gui" % (data['SP_Name'], data['Node_One_Text'], data['lvm_name'], data['lv_Text'])
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break
                 elif i in Resource:
                     node_val = str(data['Storage_pool_val']).replace(',',' ')
                     sp_val = str(data['sp']).strip(",").replace(',',' ')
                     str_cmd = "python3 vtel.py stor r c %s -s %s%s -n %s -sp %s -gui" %(data['Resource_Name_one'],data['size_one'],data['select_one'],node_val,sp_val)
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break
                 elif i in Resource_mirror:
                     node_val = str(data['Storage_pool_val']).replace(',',' ')
                     sp_val = str(data['sp']).strip(",").replace(',',' ')
-    
-                    str_cmd = "python3 vtel.py stor r c %s -am -n %s -sp %s -gui" %(data['Resource_Name_one'],node_val,sp_val)
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    str_cmd = "python3 vtel.py stor r c %s -am -n %s -sp %s -gui" %(data['Resource_Name_mirror'],node_val,sp_val)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break
                 elif i in Resurce_auto:
                     str_cmd = "python3 vtel.py stor r c %s -s %s%s -a -num %d -gui" % (data['Resource_Name_two'], data['size_two'], data['select_two'], int(data['Node_Num']))
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break
                 elif i in Diskless:
                     str_cmd = "python3 vtel.py stor r c %s -diskless -n %s -gui" % (data['Diskless_name'], data['Diskless_node'])
-                    str_cmd = str_cmd.encode()
-                    CLI_result = vst.conn(str_cmd)
+                    CLI_result = vst.conn(str_cmd.encode())
                     break 
             return 'SUCCESS' if CLI_result == True else  CLI_result
                 
