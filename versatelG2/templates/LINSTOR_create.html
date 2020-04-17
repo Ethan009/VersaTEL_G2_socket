@@ -452,8 +452,6 @@ body {
 						<textarea class="form-control" id="text_show"
 							style="height: 300px"></textarea>
 					</div>
-
-
 				</div>
 				<!-- /.modal-content -->
 			</div>
@@ -461,18 +459,13 @@ body {
 		</div>
 		<!-- /.modal -->
 	</div>
-
-
 	<script type="text/javascript">
 	$("#Node_create").click(function () {
      var Node_Name = $("#Node_Name").val()
      var IP = $("#IP").val()
-	
-	     
      var Node_Type =document.getElementById("sel1");
      var index=Node_Type.selectedIndex;
      var Node_Type_Test = Node_Type.options[index].text;
-     
      $.ajax({
          url:"/LINSTOR_message",
          type:"GET",
@@ -493,19 +486,13 @@ body {
   ///////////////////////////////////////////////
  	$("#storage_pool_create").click(function () {
      var SP_Name = $("#SP_Name").val()
-     
      var Node_One =document.getElementById("Node");
      var index = Node_One.selectedIndex;
      var Node_One_Text = Node_One.options[index].text;
-     
      var radio_text = $("input[name='gender']:checked").val();
-
      var lv =document.getElementById("lv");
      var index = lv.selectedIndex;
      var lv_Text = lv.options[index].text;
-     
-     
-     
      $.ajax({
          url:"/LINSTOR_message",
          type:"GET",
@@ -514,7 +501,6 @@ body {
              Node_One_Text:Node_One_Text,
              lvm_name:radio_text,
              lv_Text:lv_Text
-             
          },
          success:function (data) {
          	$("#text_show").empty();
@@ -533,7 +519,6 @@ body {
      var select_one = $("#select_one").val()
      var Resource_Name_one = $("#Resource_Name_one").val()
      var Storage_pool_val = $("#Storage_pool").val().toString()
-     
 	 var text = [];
 	$('#Storage_pool option:selected').each(function () {
 		text.push($(this).text());
@@ -556,9 +541,6 @@ body {
          	$("#text_show").empty();
             $("#text_show").val(data);
             $("#myModal123").modal('show');
-
-         //$("#double").val(data);
-          //赋值
          },
          error:function () {
          }
@@ -570,7 +552,6 @@ body {
   $("#add_mirror_one").click(function () {
 	var Resource_Name_one = $("#Resource_Name_one").val()
      var Storage_pool_val = $("#Storage_pool").val().toString()
-     
 	 var text = [];
 	$('#Storage_pool option:selected').each(function () {
 		text.push($(this).text());
@@ -600,18 +581,12 @@ body {
       $("#Resource_Name_two").val("");
      $("#size_two").val("");
  });
-  
-  
- 
- 
  /////////////////////////////////////
  $("#mirror_create_two").click(function () {
      var Resource_Name_two = $("#Resource_Name_two").val()
      var size_two = $("#Size_two").val()
      var select_two = $("#select_two").val().toString()
      var Node_Num = $("#Node_Num").val().toString()
-     
-     
      $.ajax({
          url:"/LINSTOR_message",
          type:"GET",

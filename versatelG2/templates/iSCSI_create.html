@@ -12,14 +12,6 @@
 <link href="{{ url_for('static',filename='bootstrap-select.css') }}"
 	rel="stylesheet" type="text/css" />
 
-<!-- <link
-	href="static/bootstrap-select-1.12.4/dist/css/bootstrap-select.css"
-	rel="stylesheet">
-<link
-	href="static/bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css"
-	rel="stylesheet"> -->
-
-
 <style type="text/css">
 body {
 	padding: 10px;
@@ -31,7 +23,6 @@ body {
 <body>
 	<div class="container">
 		<div class="row clearfix">
-
 
 			<!-- ------------------------ -->
 			<div class="col-md-12 column col-sm-2">
@@ -61,8 +52,6 @@ body {
 					</div>
 				</div>
 			</div>
-			<!---------------------------->
-
 			<!-- ------------------------ -->
 			<div class="col-md-12 column">
 
@@ -95,24 +84,21 @@ body {
 
 					<script type="text/javascript">
 					$('#Host').selectpicker({width:200});
-					
 				    $(function() {
                             $.ajax({
                                 url: "/configuration_data",
                                 type: "GET",
                                 dataType: "json",
                                 success: function(data) {
-                                    //var _data = data.data; //由于后台传过来的json有个data，在此重命名
-                                      $('#Host').html(""); 
+                                    $('#Host').html(""); 
                                     var html = "";
                                     var Host_dict = data.Host
                                     for(i in Host_dict) {
-                                     html += '<option value=' + i+ '>' + i + '</option>'
+                                     	html += '<option value=' + i+ '>' + i + '</option>'
                                     }
-                                      $('#Host').append(html);  
-                                            // 缺一不可
-							        $('#Host').selectpicker('refresh');
-							        $('#Host').selectpicker('render');
+                                      	$('#Host').append(html);  
+							        	$('#Host').selectpicker('refresh');
+							        	$('#Host').selectpicker('render');
                                 }
                             });
                             });
@@ -380,7 +366,6 @@ body {
  $("#DiskGroup_create").click(function () {
      var DiskGroup_Name = $("#DiskGroup_Name").val()
      var Disk = $("#Disk").val().toString()
-  
      $.ajax({
          url:"/send_message",
          type:"GET",
@@ -389,10 +374,7 @@ body {
              Disk:Disk
          },
          success:function (data) {
-         alert(data);
-         
-         //$("#double").val(data);
-          //赋值
+         	alert(data);
          },
          error:function () {
          }
@@ -414,8 +396,6 @@ body {
          },
          success:function (data) {
             alert(data);
-         //$("#double").val(data);
-          //赋值
          },
          error:function () {
          }
@@ -428,59 +408,6 @@ $("#newcreate").click(function(){
  	$("input[type=text]").val('');
 });
 </script>
-
-		<script type="text/javascript">
-$("#see").click(function(){
-window.parent.location.href="/";
-});
-</script>
-		<script type="text/javascript">
-           $(document).ready(function(){
-               var value = 0;
-               var time = 50;
-               //进度条复位函数
-               function reset( ) {
-                 value = 0
-                   $("#prog").removeClass("progress-bar-success").css("width","0%").text("等待启动");
-                   //setTimeout(increment,5000);
-               }
-               //百分数增加，0-30时为红色，30-60为黄色，60-90为蓝色，>90为绿色
-               function increment( ) {
-                   value += 1;
-                   $("#prog").css("width",value + "%").text(value + "%");
-                   if (value>=0 && value<=30) {
-                       $("#prog").addClass("progress-bar-danger");
-                   }
-                   else if (value>=30 && value <=60) {
-                       $("#prog").removeClass("progress-bar-danger");
-                       $("#prog").addClass("progress-bar-warning");
-                   }
-                   else if (value>=60 && value <=90) {
-                       $("#prog").removeClass("progress-bar-warning");
-                       $("#prog").addClass("progress-bar-info");
-                   }
-                   else if(value >= 90 && value<100) {
-                       $("#prog").removeClass("progress-bar-info");
-                       $("#prog").addClass("progress-bar-success");    
-                   }
-                   else{
-                      setTimeout(reset,3000);
-                      return;
-                   }
-                   st = setTimeout(increment,time);
-               }
-           });
-       </script>
-		<script type="text/javascript">
-$(function(){
-var i = 0;
-setInterval(function(){
-    $("#monthTotal").html("正在创建，请等待。。。");
-	$(".progress-bar").css("width",i+"%")
-	i++;
-},300);
-});
-
-</script>
+		
 </body>
 </html>

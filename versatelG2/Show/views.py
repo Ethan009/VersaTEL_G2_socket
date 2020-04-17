@@ -16,7 +16,7 @@ showblue.add_url_rule('/show', view_func=model.showView.as_view('showview'))
 showblue.add_url_rule('/Node', view_func=model.NodeView.as_view('Nodeview'))
 showblue.add_url_rule('/Resource', view_func=model.ResourceView.as_view('Resourceview'))
 showblue.add_url_rule('/StoragePool', view_func=model.StoragePoolView.as_view('StoragePoolview'))
-showblue.add_url_rule('/Configuration', view_func=model.iSCSIShowView.as_view('iSCSIShowview'))
+showblue.add_url_rule('/iSCSIShow', view_func=model.iSCSIShowView.as_view('iSCSIShowview'))
 
 
 

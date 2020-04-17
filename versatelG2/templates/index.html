@@ -90,7 +90,7 @@
 							onclick="selectItem(this)" id="StoragePool"><span>StoragePool</span></a></li>
 
 						<li class="layui-nav-item"><a class="title"
-							onclick="selectItem(this)" id="Configuration"><span>iSCSI_Show</span></a></li>
+							onclick="selectItem(this)" id="iSCSI_Show"><span>iSCSI_Show</span></a></li>
 
 
 					</ul>
@@ -131,8 +131,8 @@
         }else if(obj.id=='StoragePool'){
                 $('#mainpage iframe').attr('src',"/StoragePool");
                 $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
-        }else if(obj.id=='Configuration'){
-                $('#mainpage iframe').attr('src',"/Configuration");
+        }else if(obj.id=='iSCSI_Show'){
+                $('#mainpage iframe').attr('src',"/iSCSI_Show");
                 $('#mainpage iframe').css({ "margin-left": "15%","max-width":"1700px"});
         }
         }

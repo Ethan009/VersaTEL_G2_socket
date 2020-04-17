@@ -38,7 +38,7 @@ class StoragePoolView(views.MethodView):
     
 class iSCSIShowView(views.MethodView):
     def get(self):
-        return render_template("Configuration.html")
+        return render_template("iSCSI_Show.html")
     
     
     
