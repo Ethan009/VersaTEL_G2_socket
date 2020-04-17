@@ -36,15 +36,6 @@ class Process_data(LINSTORDB):
         date_set = cur.fetchall()
         return date_set
 
-    # def get_vg(self):
-    #     select_sql = "SELECT VG FROM vgtb"
-    #     return self.sql_fetch_all(select_sql)
-    #
-    #
-    # def get_thinlv(self):
-    #     select_sql = "SELECT LV FROM thinlvtb"
-    #     return self.sql_fetch_all(select_sql)
-
     # 选项node数据
     def get_option_node(self):
 
@@ -90,10 +81,6 @@ class Process_data(LINSTORDB):
 
         vg = self.sql_fetch_all(sql_vg)
         thinlv = self.sql_fetch_all(sql_thinlv)
-
-        # before
-        # vg = self.get_vg()
-        # thinlv = self.get_thinlv()
 
         list_vg = []
         list_thinlv = []
